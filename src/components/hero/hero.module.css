@@ -1,0 +1,75 @@
+.hero_container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 1200px;
+  height: fit-content;
+  margin: 0 auto;
+  padding: 100px 0 30px 0;
+  gap: 40px;
+}
+
+.hero_content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.hero_title {
+  font-family: "Clash Grotesk", sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: rgb(var(--primary));
+  font-size: 44px;
+}
+
+.hero_subtitle {
+  font-family: "Instrument Serif", serif;
+  letter-spacing: 1px;
+  text-align: center;
+  font-size: 36px;
+  width: 60%;
+}
+
+.hero_description {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  text-align: center;
+  width: 50%;
+}
+
+.hero_buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.hero_button_primary,
+.hero_button_secondary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 24px;
+  background-color: rgb(var(--primary));
+  color: var(--bg);
+  font-size: 16px;
+  font-family: "Roboto";
+  font-weight: 600;
+}
+
+.hero_button_secondary {
+  background-color: transparent;
+  color: rgb(var(--primary));
+  border: 2px solid rgb(var(--primary));
+}
+
+.hero_image img {
+  width: 200px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
