@@ -1,15 +1,14 @@
 /* Font: Clash Grotesk */
 @font-face {
   font-family: "Clash Grotesk";
-  src: url("./assets/fonts/ClashGrotesk_Complete/Fonts/OTF/ClashGrotesk-Bold.otf")
-    format("opentype");
+  src: url("./assets/fonts/ClashGrotesk_Complete/Fonts/OTF/ClashGrotesk-Bold.otf") format("opentype");
   font-weight: bold;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Clash Grotesk";
-  src: url("./assets/fonts/ClashGrotesk_Complete/Fonts/OTF/ClashGrotesk-Regular.otf")
-    format("opentype");
+  src: url("./assets/fonts/ClashGrotesk_Complete/Fonts/OTF/ClashGrotesk-Regular.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -17,15 +16,14 @@
 /* Font: Instrument Serif */
 @font-face {
   font-family: "Instrument Serif";
-  src: url("./assets/fonts/Instrument_Serif/InstrumentSerif-Regular.ttf")
-    format("truetype");
+  src: url("./assets/fonts/Instrument_Serif/InstrumentSerif-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Instrument Serif";
-  src: url("./assets/fonts/Instrument_Serif/InstrumentSerif-Italic.ttf")
-    format("truetype");
+  src: url("./assets/fonts/Instrument_Serif/InstrumentSerif-Italic.ttf") format("truetype");
   font-weight: normal;
   font-style: italic;
 }
@@ -33,15 +31,14 @@
 /* Font: Roboto (Variable) */
 @font-face {
   font-family: "Roboto";
-  src: url("./assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf")
-    format("truetype");
+  src: url("./assets/fonts/Roboto/Roboto-VariableFont_wdth,wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Roboto";
-  src: url("./assets/fonts/Roboto/Roboto-Italic-VariableFont_wdth,wght.ttf")
-    format("truetype");
+  src: url("./assets/fonts/Roboto/Roboto-Italic-VariableFont_wdth,wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: italic;
 }
@@ -53,8 +50,10 @@
 }
 
 :root {
-  --primary: 183, 4, 4;   /* B70404 */
-  --secondary: 255, 144, 131;   /* FF9083 */
+  /* B70404 */
+  --primary: 183, 4, 4;
+  /* FF9083 */
+  --secondary: 255, 144, 131;
 
   --bg: #f9f0de;
   --subText: #404040;
@@ -84,4 +83,8 @@ button {
 a {
   text-decoration: none;
   cursor: pointer;
+}
+
+img {
+  -webkit-user-drag: none;
 }
