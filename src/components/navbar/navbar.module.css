@@ -28,9 +28,10 @@
   font-family: "Roboto", sans-serif;
   letter-spacing: 0.5px;
   font-size: 16px;
+  padding: 6px 20px;
 }
 
-.navbar_button {
+.navbar_appointment_link {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -43,7 +44,7 @@
   font-family: "Roboto", sans-serif;
 }
 
-.navbar_button img {
+.navbar_button .arrow {
   width: 18px;
   aspect-ratio: 1 / 1;
 }

@@ -1,0 +1,136 @@
+.faqs_container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 1000px;
+    height: fit-content;
+    margin: 0 auto;
+    padding: 100px 0 30px 0;
+    gap: 24px;
+}
+
+.faqs_header_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.faqs_title {
+    font-family: "Roboto", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(var(--primary));
+    letter-spacing: 0.5px;
+    background-color: rgba(var(--secondary), 0.25);
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.faqs_header_subtitle {
+    font-family: "Instrument Serif", serif;
+    font-size: 36px;
+    color: #000;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.faqs_header_description {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    text-align: center;
+    width: 90%;
+}
+
+.faqs_content_wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+}
+
+.faq_item {
+    background-color: rgba(var(--secondary), 0.25);
+    border-radius: 8px;
+    border: 1px solid rgba(var(--primary), 0.25);
+    padding: 12px 24px;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.faq_item:hover {
+    background-color: rgba(var(--secondary), 0.35);
+    border-color: rgba(var(--primary), 0.35);
+}
+
+.faq_question_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq_question {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.faq_icon {
+    display: flex;
+    width: 24px;
+    aspect-ratio: 1/ 1;
+    transition: transform 0.3s ease-in-out;
+}
+
+.faq_icon:hover {
+    transform: scale(1.1);
+}
+
+.faq_answer {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.faq_answer.active {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 8px;
+}
+
+.faq_answer.inactive {
+    max-height: 0;
+    opacity: 0;
+}
+
+.faqs_stars {
+    position: absolute;
+    left: 50%;
+    bottom: -230px;
+    transform: translateX(-50%);
+    width: 500px;
+    z-index: 1;
+    animation: rotateStar 20s linear infinite;
+}
+
+@keyframes rotateStar {
+    0% {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) rotate(360deg);
+    }
+}
