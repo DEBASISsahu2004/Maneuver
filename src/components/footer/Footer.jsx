@@ -13,17 +13,18 @@ const Footer = () => {
                     <p className={styles.footer_text_two}>© 2025 Maneuver Studios. All rights reserved</p>
                 </div>
                 <div className={styles.footer_socials}>
-                    <a className={styles.socials_link} href="https://www.instagram.com/mnvr.stdios/">
+                    <a target="_blank" className={styles.socials_link} href="https://www.instagram.com/mnvr.stdios/">
                         <img src={Instagram} alt="instagram" className={styles.footer_icon} />
                     </a>
 
-                    <a className={styles.socials_link} href="https://x.com/mnvrstdios">
+                    <a target="_blank" className={styles.socials_link} href="https://x.com/mnvrstdios">
                         <img src={X} alt="x" className={styles.footer_icon} />
                     </a>
-                    <a className={styles.socials_link} href="https://www.threads.net/@mnvr.stdios">
+                    <a target="_blank" className={styles.socials_link} href="https://www.threads.net/@mnvr.stdios">
                         <img src={Threads} alt="threads" className={styles.footer_icon} />
                     </a>
-                    <a className={styles.socials_link} href="mailto:contact@maneuverstudios.com">
+
+                    <a target="_blank" className={styles.socials_link} href="mailto:contact@maneuverstudios.com">
                         <img src={Mail} alt="mail" className={styles.footer_icon} />
                     </a>
                 </div>
