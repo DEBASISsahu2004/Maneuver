@@ -77,17 +77,14 @@
 }
 
 @media (max-width: 600px) {
-  .navbar_hero_link {
-    margin: 0 12px;
-  }
 
   .navbar_hero_link {
-    margin: 0 12px;
+    margin: 0 4px 0 10px;
   }
 
   .navbar_link {
     font-size: 14px;
-    padding: 0 8px;
+    padding: 4px;
   }
 
   .navbar_appointment_link {
