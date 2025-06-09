@@ -6,22 +6,22 @@ import PMCHome from '../../assets/images/service/PMCHome.png'
 import MejocareHome from '../../assets/images/service/MejocareHome.png'
 import MalangHome from '../../assets/images/service/MalangHome.png'
 
-import Star from '../../assets/icons/star.svg'
-import FramerLogo from '../../assets/icons/framer-logo.svg'
-import FigmaLogo from '../../assets/icons/figma-logo.svg'
-import LottieLogo from '../../assets/icons/lottie-logo.svg'
-import VsLogo from '../../assets/icons/vs-logo.svg'
+import Star from '../../assets/icons/service-card2/star.svg'
+import FramerLogo from '../../assets/icons/service-card2/framer-logo.svg'
+import FigmaLogo from '../../assets/icons/service-card2/figma-logo.svg'
+import LottieLogo from '../../assets/icons/service-card2/lottie-logo.svg'
+import VsLogo from '../../assets/icons/service-card2/vs-logo.svg'
 
-import StrideHome from '../../assets/icons/stride-home.svg'
+import StrideHome from '../../assets/icons/service-card3/stride-home.svg'
 
-import BlockOne from '../../assets/icons/service-block/block-one.svg'
-import BlockTwo from '../../assets/icons/service-block/block-two.svg'
-import BlockThree from '../../assets/icons/service-block/block-three.svg'
-import MiddleBlockCircle from '../../assets/icons/service-block/middle-block-circle.svg'
+import BlockOne from '../../assets/icons/service-card4/block-one.svg'
+import BlockTwo from '../../assets/icons/service-card4/block-two.svg'
+import BlockThree from '../../assets/icons/service-card4/block-three.svg'
+import MiddleBlockCircle from '../../assets/icons/service-card4/middle-block-circle.svg'
 
-import MnvrNoti from '../../assets/icons/mnvr-noti.svg'
-import Avatar1Noti from '../../assets/icons/avatar1-noti.svg'
-import Avatar2Noti from '../../assets/icons/avatar2-noti.svg'
+import MnvrNoti from '../../assets/icons/service-card5/mnvr-noti.svg'
+import Avatar1Noti from '../../assets/icons/service-card5/avatar1-noti.svg'
+import Avatar2Noti from '../../assets/icons/service-card5/avatar2-noti.svg'
 
 const Service = () => {
   return (

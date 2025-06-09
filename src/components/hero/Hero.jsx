@@ -1,5 +1,5 @@
 import styles from './hero.module.css'
-import StarSketch from '../../assets/images/hero/starSketch.png'
+import StarSketch from '../../assets/icons/home-star-sketch.svg'
 
 const Hero = () => {
     return (

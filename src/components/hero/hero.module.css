@@ -1,10 +1,10 @@
 .hero_container {
   position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  width: 1200px;
+  align-items: center;
+  justify-content: center;
+  width: 85%;
   height: fit-content;
   margin: 0 auto;
   padding: 100px 0 30px 0;
@@ -45,6 +45,7 @@
 
 .hero_buttons {
   display: flex;
+  justify-content: center;
   gap: 16px;
 }
 
@@ -72,4 +73,74 @@
   width: 200px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .hero_container {
+    padding: 60px 0 20px 0;
+    gap: 24px;
+  }
+
+  .hero_title {
+    font-size: 44px;
+  }
+
+  .hero_subtitle {
+    font-size: 24px;
+    width: 90%;
+  }
+
+  .hero_description {
+    font-size: 16px;
+    width: 85%;
+  }
+
+  .hero_buttons {
+    gap: 10px;
+    width: 100%;
+  }
+
+  .hero_button_primary,
+  .hero_button_secondary {
+    padding: 6px 18px;
+    font-size: 14px;
+  }
+
+  .hero_image img {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero_container {
+    padding: 32px 0 10px 0;
+    gap: 16px;
+  }
+
+  .hero_content {
+    gap: 12px;
+  }
+
+  .hero_title {
+    font-size: 32px;
+  }
+
+  .hero_subtitle {
+    font-size: 22px;
+    width: 95%;
+  }
+
+  .hero_description {
+    font-size: 14px;
+    width: 95%;
+  }
+
+  .hero_buttons {
+    gap: 8px;
+    width: 100%;
+  }
+
+  .hero_image img {
+    margin-top: 36px;
+  }
 }
