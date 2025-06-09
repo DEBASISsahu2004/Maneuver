@@ -73,6 +73,10 @@ body {
   background-color: var(--bg);
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 button {
   -webkit-tap-highlight-color: transparent;
   outline: none;
