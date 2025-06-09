@@ -14,6 +14,10 @@
   backdrop-filter: blur(10px);
 }
 
+.navbar_container img{
+  user-select: none;
+}
+
 .navbar_hero_link {
   color: rgb(var(--primary));
   font-family: "Clash Grotesk", sans-serif;
@@ -79,12 +83,12 @@
 @media (max-width: 600px) {
 
   .navbar_hero_link {
-    margin: 0 4px 0 10px;
+    margin: 0 6px 0 10px;
   }
 
   .navbar_link {
     font-size: 14px;
-    padding: 4px;
+    padding: 6px;
   }
 
   .navbar_appointment_link {
