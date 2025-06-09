@@ -13,8 +13,8 @@ const Hero = () => {
                     High-impact websites and apps with strategy, sleek visuals, and clean code - built to attract, engage, and convert. From startups to growing brands, we help businesses turn digital traffic into real-world results.
                 </p>
                 <div className={styles.hero_buttons}>
-                    <button className={styles.hero_button_primary}>Get Started</button>
-                    <button className={styles.hero_button_secondary}>Explore Our Work</button>
+                    <a href="#contactus" className={styles.hero_button_primary}>Get Started</a>
+                    <a href="#portfolio" className={styles.hero_button_secondary}>Explore Our Work</a>
                 </div>
             </div>
 
