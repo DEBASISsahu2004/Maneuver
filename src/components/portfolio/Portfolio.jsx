@@ -13,7 +13,7 @@ import PmcBgTwo from '../../assets/images/portfolio/pmc-bg-two.png';
 // import StrideBgTwo from '../../assets/images/portfolio/stride-bg-two.png';
 
 import PrintSaathiHome from '../../assets/icons/portfolio/print-saathi-home.svg';
-import NoMondayHome from '../../assets/icons/portfolio/noMonday-home.svg';
+import NoMondayHome from '../../assets/icons/portfolio/nomonday-home.svg';
 import MejocareHome from '../../assets/icons/portfolio/mejocare-home.svg';
 import PMCHome from '../../assets/icons/portfolio/pragmatic-home.svg';
 // import StrideHome from '../../assets/icons/portfolio/stride-home.svg';
