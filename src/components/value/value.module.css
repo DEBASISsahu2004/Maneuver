@@ -424,6 +424,10 @@
 }
 
 @media (max-width: 768px) {
+  .value_container {
+    padding: 80px 0 30px 0;
+  }
+
   .value_content_wrapper {
     grid-template-columns: repeat(1, 310px);
     grid-template-rows: repeat(6, 340px);

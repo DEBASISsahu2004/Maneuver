@@ -22,9 +22,9 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar_container}>
-      {windowWidth > 600 ? (
+      {windowWidth > 900 ? (
         <>
-          <a className={styles.navbar_hero_link} href="#hero">mnvr.</a>
+          <a className={styles.navbar_hero_link} href="#">mnvr.</a>
           <a className={styles.navbar_link} href="#services">Services</a>
           <a className={styles.navbar_link} href="#values">Values</a>
           <a className={styles.navbar_link} href="#portfolio">Portfolio</a>

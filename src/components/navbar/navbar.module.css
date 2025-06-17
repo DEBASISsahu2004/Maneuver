@@ -1,7 +1,7 @@
 .navbar_container {
   position: sticky;
   top: 20px;
-  z-index: 1000;
+  z-index: 5000;
   width: fit-content;
   height: fit-content;
   margin: 0 auto;
@@ -38,7 +38,7 @@
 .navbar_appointment_link {
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   gap: 6px;
   padding: 10px 20px;
   border-radius: 24px;
@@ -55,8 +55,16 @@
 
 @media (max-width: 900px) {
   .navbar_container {
-    top: 20px;
-    gap: 6px;
+    position: fixed;
+    left: 50%;
+    bottom: 10px;
+    top: auto;
+    transform: translateX(-50%);
+    width: fit-content;
+    z-index: 1000;
+    margin: 0;
+    border-radius: 50px;
+    gap: 20px;
   }
 
   .navbar_hero_link {
@@ -83,12 +91,13 @@
 @media (max-width: 600px) {
 
   .navbar_hero_link {
-    margin: 0 6px 0 10px;
+    margin: 0 0px 0 10px;
+    gap: 8px;
   }
 
   .navbar_link {
     font-size: 14px;
-    padding: 6px;
+    padding: 6px 0px;
   }
 
   .navbar_appointment_link {
