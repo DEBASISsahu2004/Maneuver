@@ -3,7 +3,7 @@ import StarSketch from '../../assets/icons/home-star-sketch.svg'
 
 const Hero = () => {
     return (
-        <section id="#" className={styles.hero_container}>
+        <section id="#home" className={styles.hero_container}>
             <div className={styles.hero_content}>
                 <h1 className={styles.hero_title}>maneuver</h1>
                 <h2 className={styles.hero_subtitle}>

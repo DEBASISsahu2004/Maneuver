@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 1000px;
+    width: 100%;
     height: fit-content;
     margin: 0 auto;
     padding: 100px 0 30px 0;
@@ -46,6 +46,7 @@
 }
 
 .contactus_content_wrapper {
+    width: 70%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     border-radius: 16px;
@@ -85,7 +86,6 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    /* Each circle will be absolutely positioned on top of each other */
 }
 
 .contactus_animation_container .circle_group {
@@ -93,30 +93,35 @@
     right: -50px;
     top: 50%;
     transform: translateY(-50%);
-    width: 100px; /* largest circle width */
-    height: 100px; /* largest circle height */
+    width: 100px;
+    /* largest circle width */
+    height: 100px;
+    /* largest circle height */
 }
 
 .contactus_animation_container .circle_group .circle:nth-child(1) {
-    width: 200px;
+    width: 150px;
     aspect-ratio: 1 / 1;
     background-color: rgba(var(--secondary), 0.25);
     z-index: 4;
 }
+
 .contactus_animation_container .circle_group .circle:nth-child(2) {
-    width: 160px;
+    width: 250px;
     aspect-ratio: 1 / 1;
     background-color: rgba(var(--secondary), 0.18);
     z-index: 3;
 }
+
 .contactus_animation_container .circle_group .circle:nth-child(3) {
-    width: 220px;
+    width: 350px;
     aspect-ratio: 1 / 1;
     background-color: rgba(var(--secondary), 0.13);
     z-index: 2;
 }
+
 .contactus_animation_container .circle_group .circle:nth-child(4) {
-    width: 280px;
+    width: 450px;
     aspect-ratio: 1 / 1;
     background-color: rgba(var(--secondary), 0.08);
     z-index: 1;
@@ -167,7 +172,7 @@
 .contactus_textarea {
     border-radius: 4px;
     background-color: rgba(var(--secondary), 0.25);
-    padding: 10px;
+    padding: 10px 12px;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     color: rgba(var(--primary));
@@ -247,4 +252,73 @@
     font-size: 13px;
     font-family: 'Roboto', sans-serif;
     font-style: italic;
+}
+
+@media (max-width: 900px) {
+    .contactus_content_wrapper {
+        width: 80%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 300px auto;
+        border-radius: 12px;
+    }
+
+    .contactus_animation_container {
+        min-height: 220px;
+        justify-content: center;
+        padding: 20px 8px;
+    }
+
+    .contactus_form_container {
+        padding: 32px 8px;
+    }
+
+    .contactus_header_subtitle {
+        font-size: 28px;
+    }
+
+    .contactus_animation_container .animation_content h2 {
+        font-size: 36px;
+    }
+
+    .contactus_animation_container .animation_content p {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 600px) {
+    .contactus_content_wrapper {
+        width: 90%;
+    }
+
+    .contactus_container {
+        padding: 40px 0 16px 0;
+        gap: 12px;
+    }
+
+    .contactus_header_description {
+        font-size: 14px;
+        width: 90%;
+    }
+
+    .contactus_form_container {
+        padding: 22px 8px;
+        gap: 8px;
+    }
+
+    .contactus_animation_container .notification {
+        top: 6%;
+    }
+
+    .contactus_row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .contactus_field_group {
+        width: 100%;
+    }
+
+    .contactus_submit {
+        font-size: 16px;
+    }
 }

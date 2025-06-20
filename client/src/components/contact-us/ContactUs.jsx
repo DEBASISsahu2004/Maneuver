@@ -1,8 +1,12 @@
 import styles from './contactus.module.css'
 import Noti from '../../assets/icons/contact-us/notification.svg'
 import React, { useState } from "react";
-import { CountrySelect } from "react-country-state-city";
-import "react-country-state-city/dist/react-country-state-city.css";
+import Select from 'react-select';
+import { countries as countryOptions } from '../../utils/CountryList.js';
+import { projectList as projectOptions } from '../../utils/ProjectList.js';
+import CountryFlag from "react-country-flag";
+import { selectStyles } from '../../utils/selectStyles.js';
+
 
 const ContactUs = () => {
   const [form, setForm] = useState({
@@ -21,16 +25,18 @@ const ContactUs = () => {
       ...form,
       [name]: value
     });
+
     setErrors({
       ...errors,
       [name]: ''
     });
   }
 
-  const handleCountryChange = (country) => {
+  // For react-select country dropdown
+  const handleCountrySelect = (option) => {
     setForm({
       ...form,
-      country: country ? country.name : ''
+      country: option ? option.value : ''
     });
     setErrors({
       ...errors,
@@ -91,7 +97,7 @@ const ContactUs = () => {
             <div className={styles.circle}></div>
             <div className={styles.circle}></div>
           </div>
-          
+
           <div className={styles.animation_content}>
             <h2>Let's Build Something Great</h2>
             <p>maneuver</p>
@@ -144,30 +150,46 @@ const ContactUs = () => {
 
           <div className={styles.contactus_row}>
             <div className={styles.contactus_field_group}>
-              <select
+              <Select
                 name="projectType"
-                className={`${styles.contactus_select_project} ${form.projectType === '' ? styles.placeholder_active : ''}`}
-                value={form.projectType}
-                onChange={handleChange}
-              >
-                <option value="">Project Type</option>
-                <option value="website">Website</option>
-                <option value="app">Mobile Application</option>
-                <option value="uiux">Website Design</option>
-                <option value="uiux">Mobile Application Design</option>
-              </select>
+                classNamePrefix="contactus_select"
+                options={projectOptions}
+                value={projectOptions.find(option => option.value === form.projectType) || null}
+                onChange={option => setForm({ ...form, projectType: option ? option.value : '' })}
+                placeholder="Project Type"
+                isClearable
+                formatOptionLabel={option => (
+                  <span style={{ display: 'flex', alignItems: 'center' }}>
+                    <span className={styles.project_icon}></span>
+                    {option.label}
+                  </span>
+                )}
+                styles={selectStyles}
+              />
               {errors.projectType && <p className={styles.contactus_error}>{errors.projectType}</p>}
             </div>
+
             <div className={styles.contactus_field_group}>
-              <CountrySelect
-                className={styles.contactus_select_country}
-                onChange={handleCountryChange}
-                placeHolder="Select Country"
+              <Select
+                name="country"
+                classNamePrefix="contactus_select"
+                options={countryOptions}
+                value={countryOptions.find(option => option.value === form.country) || null}
+                onChange={handleCountrySelect}
+                placeholder="Select Country"
+                isClearable
+                formatOptionLabel={option => (
+                  <span style={{ display: 'flex', alignItems: 'center' }}>
+                    <CountryFlag countryCode={option.value} svg style={{ width: 20, marginRight: 8 }} />
+                    {option.label}
+                  </span>
+                )}
+                styles={selectStyles}
               />
               {errors.country && <p className={styles.contactus_error}>{errors.country}</p>}
             </div>
           </div>
-          
+
           <div className={styles.contactus_row}>
             <div className={styles.contactus_field_group}>
               <textarea
@@ -182,7 +204,7 @@ const ContactUs = () => {
           </div>
 
           <button type="submit" className={styles.contactus_submit}>Submit</button>
-          
+
           <p className={styles.contactus_hint}>Still overthinking it? Just type 'hi' - we'll take it from there.</p>
         </form>
       </div>
