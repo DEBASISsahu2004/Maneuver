@@ -17,6 +17,7 @@
   align-items: center;
   flex-direction: column;
   gap: 14px;
+  width: 90%;
 }
 
 .service_title {
