@@ -8,7 +8,7 @@
     height: fit-content;
     margin: 0 auto;
     padding: 100px 0 30px 0;
-    gap: 24px;
+    gap: 40px;
 }
 
 .contactus_header_container {
@@ -17,6 +17,7 @@
     align-items: center;
     flex-direction: column;
     gap: 14px;
+    width: 90%;
 }
 
 .contactus_title {
@@ -42,7 +43,7 @@
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     text-align: center;
-    width: 90%;
+    width: 50%;
 }
 
 .contactus_content_wrapper {
@@ -254,7 +255,34 @@
     font-style: italic;
 }
 
+@media (max-width: 1230px) {
+    .contactus_container {
+        padding: 90px 0 30px 0;
+    }
+
+    .contactus_header_subtitle {
+        font-size: 32px;
+    }
+
+    .contactus_header_description {
+        width: 60%;
+    }
+}
+
 @media (max-width: 900px) {
+    .contactus_container {
+        padding: 40px 0 30px 0;
+        gap: 24px;
+    }
+
+    .contactus_header_container {
+        gap: 10px;
+    }
+
+    .contactus_header_description {
+        width: 80%;
+    }
+
     .contactus_content_wrapper {
         width: 80%;
         grid-template-columns: 1fr;
@@ -272,10 +300,6 @@
         padding: 32px 8px;
     }
 
-    .contactus_header_subtitle {
-        font-size: 28px;
-    }
-
     .contactus_animation_container .animation_content h2 {
         font-size: 36px;
     }
@@ -286,13 +310,19 @@
 }
 
 @media (max-width: 600px) {
+
+    .contactus_container,
     .contactus_content_wrapper {
         width: 90%;
     }
 
-    .contactus_container {
-        padding: 40px 0 16px 0;
-        gap: 12px;
+    .contactus_title {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    .contactus_header_subtitle {
+        font-size: 26px;
     }
 
     .contactus_header_description {

@@ -8,7 +8,7 @@
     height: fit-content;
     margin: 0 auto;
     padding: 100px 0 30px 0;
-    gap: 24px;
+    gap: 40px;
 }
 
 .faqs_header_container {
@@ -17,6 +17,7 @@
     align-items: center;
     flex-direction: column;
     gap: 14px;
+    width: 90%;
 }
 
 .faqs_title {
@@ -42,11 +43,11 @@
     font-family: "Roboto", sans-serif;
     font-size: 16px;
     text-align: center;
-    width: 90%;
+    width: 50%;
 }
 
 .faqs_content_wrapper {
-    position: relative;
+    position: relative; 
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -138,28 +139,32 @@
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1230px) {
     .faqs_container {
         padding: 90px 0 30px 0;
+    }
+
+    .faqs_header_subtitle {
+        font-size: 32px;
+    }
+
+    .faqs_header_description {
+        width: 60%;
+    }
+}
+
+@media (max-width: 900px) {
+    .faqs_container {
+        padding: 40px 0 30px 0;
         gap: 24px;
     }
 
     .faqs_header_container {
-        gap: 14px;
-    }
-
-    .faqs_title {
-        font-size: 20px;
-        padding: 10px 20px;
-    }
-
-    .faqs_header_subtitle {
-        font-size: 36px;
+        gap: 10px;
     }
 
     .faqs_header_description {
-        font-size: 16px;
-        width: 90%;
+        width: 80%;
     }
 
     .faqs_content_wrapper {
@@ -192,12 +197,12 @@
 
 @media (max-width: 600px) {
     .faqs_container {
-        padding: 80px 0 10px 0;
+        width: 90%;
     }
 
     .faqs_title {
-        font-size: 18px;
-        padding: 10px 16px;
+        font-size: 16px;
+        padding: 8px 16px;
     }
 
     .faqs_header_subtitle {
@@ -205,7 +210,7 @@
     }
 
     .faqs_header_description {
-        font-size: 16px;
+        font-size: 14px;
         width: 90%;
     }
 

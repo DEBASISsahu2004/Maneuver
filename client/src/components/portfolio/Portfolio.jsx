@@ -125,9 +125,9 @@ const Portfolio = () => {
             <div className={styles.portfolio_header_container}>
                 <h2 className={styles.portfolio_title}>Portfolio</h2>
                 <p className={styles.portfolio_header_subtitle}>Built on Trust</p>
-                <p className={styles.portfolio_header_description}>From startups to seasoned brands - we've helped them scale, stand out, and stay ahead. Their words say it better than we could.</p>
+                <p className={styles.portfolio_header_description}>From startups to seasoned brands - we've helped them scale, stand out, and stay ahead. Their feedback speak for us.</p>
             </div>
-            
+
             <div className={styles.portfolio_content_wrapper}>
                 <div className={styles.portfolio_project_card}>
                     <div className={styles.portfolio_project_images}>
