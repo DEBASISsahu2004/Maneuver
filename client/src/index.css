@@ -55,6 +55,8 @@
   /* FF9083 */
   --secondary: 255, 144, 131;
 
+  --primaryHover: #a50404;
+
   --bg: #f9f0de;
   --subText: #404040;
 
@@ -71,6 +73,7 @@ html {
 body {
   position: relative;
   background-color: var(--bg);
+  cursor: url('/cursor.svg'), auto;
 }
 
 body::-webkit-scrollbar {
@@ -81,12 +84,12 @@ button {
   -webkit-tap-highlight-color: transparent;
   outline: none;
   border: none;
-  cursor: pointer;
+  cursor: url('/pointer-cursor.svg'), auto;
 }
 
 a {
   text-decoration: none;
-  cursor: pointer;
+  cursor: url('/pointer-cursor.svg'), auto;
 }
 
 img {

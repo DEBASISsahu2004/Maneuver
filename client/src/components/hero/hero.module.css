@@ -6,12 +6,12 @@
   justify-content: space-around;
   width: 100%;
   height: 88dvh;
-  margin: 0 auto;
-  padding-top: 40px;
+  padding-top: 44px;
 }
 
 .hero_content {
   position: relative;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +25,7 @@
   letter-spacing: 1px;
   color: rgb(var(--primary));
   font-size: 44px;
+  text-align: center;
 }
 
 .hero_subtitle {
@@ -32,14 +33,21 @@
   letter-spacing: 1px;
   text-align: center;
   font-size: 36px;
-  width: 60%;
+  line-height: 1.15;
 }
 
 .hero_description {
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
   width: 50%;
+}
+
+.hero_quote {
+  font-family: "Instrument Serif", serif;
+  font-size: 16px;
+  text-align: center;
+  font-style: italic;
 }
 
 .hero_buttons {
@@ -55,12 +63,15 @@
   align-items: center;
   padding: 10px 20px;
   border-radius: 24px;
-  background-color: rgb(var(--primary));
-  color: var(--bg);
   font-size: 16px;
   font-family: "Roboto";
   font-weight: 600;
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.hero_button_primary {
+  background-color: rgb(var(--primary));
+  color: var(--bg);
 }
 
 .hero_button_secondary {
@@ -69,45 +80,41 @@
   border: 2px solid rgb(var(--primary));
 }
 
-.hero_button_primary:hover,
-.hero_button_secondary:hover {
-  transform: scale(1.05);
+.hero_button_primary:hover {
+  background-color: var(--primaryHover);
 }
 
-.hero_button_primary:active,
-.hero_button_secondary:active {
-  transform: scale(0.95);
+.hero_button_secondary:hover {
+  background-color: rgb(var(--primary));
+  color: var(--bg);
 }
 
 .hero_image img {
   width: 200px;
   aspect-ratio: 1 / 1;
-  object-fit: cover;
+  object-fit: contain;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .hero_container {
-    padding: 60px 0;
-    gap: 24px;
+    padding-top: 40px;
   }
 
   .hero_title {
-    font-size: 44px;
+    font-size: 40px;
   }
 
   .hero_subtitle {
-    font-size: 24px;
-    width: 90%;
+    font-size: 32px;
   }
 
   .hero_description {
     font-size: 16px;
-    width: 85%;
+    width: 55%;
   }
 
   .hero_buttons {
     gap: 10px;
-    width: 100%;
   }
 
   .hero_button_primary,
@@ -115,20 +122,12 @@
     padding: 6px 18px;
     font-size: 14px;
   }
-
-  .hero_image img {
-    margin-top: 24px;
-  }
 }
 
-@media (max-width: 600px) {
-  .hero_container {
-    padding: 32px 0 10px 0;
-    gap: 16px;
-  }
+@media (max-width: 730px) {
 
   .hero_content {
-    gap: 12px;
+    gap: 16px;
   }
 
   .hero_title {
@@ -136,21 +135,15 @@
   }
 
   .hero_subtitle {
-    font-size: 22px;
-    width: 95%;
+    font-size: 24px;
   }
 
   .hero_description {
     font-size: 14px;
-    width: 95%;
+    width: 75%;
   }
 
-  .hero_buttons {
-    gap: 8px;
-    width: 100%;
-  }
-
-  .hero_image img {
-    margin-top: 36px;
+  .hero_quote {
+    font-size: 14px;
   }
 }
