@@ -70,7 +70,6 @@
 @media (max-width: 1100px) {
     .footer_container {
         padding: 56px 64px 0 64px;
-        height: 380px;
     }
 
     .footer_text_container {
@@ -86,7 +85,6 @@
 @media (max-width: 800px) {
     .footer_container {
         padding: 48px 56px 0 56px;
-        height: 330px;
     }
 
     .footer_content {
@@ -108,7 +106,7 @@
 @media (max-width: 500px) {
     .footer_container {
         padding: 48px 40px 0 40px;
-        height: 300px;
+        height: 350px;
     }
 
     .footer_content {
