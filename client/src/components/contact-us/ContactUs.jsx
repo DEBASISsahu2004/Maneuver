@@ -7,47 +7,36 @@ import { projectList as projectOptions } from '../../utils/ProjectList.js';
 import CountryFlag from "react-country-flag";
 import { selectStyles } from '../../utils/selectStyles.js';
 
+const initialForm = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  projectType: '',
+  country: '',
+  message: ''
+};
 
 const ContactUs = () => {
-  const [form, setForm] = useState({
-    name: '',
-    company: '',
-    email: '',
-    projectType: '',
-    country: '',
-    message: ''
-  });
+  const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({
-      ...form,
-      [name]: value
-    });
+    setForm((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
+  };
 
-    setErrors({
-      ...errors,
-      [name]: ''
-    });
-  }
-
-  // For react-select country dropdown
-  const handleCountrySelect = (option) => {
-    setForm({
-      ...form,
-      country: option ? option.value : ''
-    });
-    setErrors({
-      ...errors,
-      country: ''
-    });
-  }
+  const handleSelectChange = (field) => (option) => {
+    setForm((prev) => ({
+      ...prev,
+      [field]: field === 'country' ? (option ? option.label : '') : (option ? option.value : '')
+    }));
+    setErrors((prev) => ({ ...prev, [field]: '' }));
+  };
 
   const validateForm = () => {
     const newErrors = {};
-    if (!form.name) newErrors.name = 'Name is required';
-
+    if (!form.firstName) newErrors.firstName = 'First name is required';
     if (!form.email) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(form.email)) {
@@ -56,28 +45,21 @@ const ContactUs = () => {
     if (!form.projectType) newErrors.projectType = 'Project type is required';
     if (!form.country) newErrors.country = 'Country is required';
     if (!form.message) newErrors.message = 'Message is required';
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  }
+    return newErrors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      // Here you can handle the form submission, e.g., send data to an API
+    const validationErrors = validateForm();
+    setErrors(validationErrors);
+    
+    if (Object.keys(validationErrors).length === 0) {
       console.log('Form submitted:', form);
-      // Reset form after submission
-      setForm({
-        name: '',
-        company: '',
-        email: '',
-        projectType: '',
-        country: '',
-        message: ''
-      });
+      setForm(initialForm);
+    } else {
+      console.info('Form validation failed:', validationErrors);
     }
-  }
+  };
 
   return (
     <section id="contactus" className={styles.contactus_container}>
@@ -105,31 +87,32 @@ const ContactUs = () => {
         </div>
 
 
-        <form className={styles.contactus_form_container} onSubmit={handleSubmit} noValidate>
+        <form className={styles.contactus_form_container} onSubmit={handleSubmit}>
           <div className={styles.contactus_row}>
             <div className={styles.contactus_field_group}>
               <input
                 type="text"
-                name="name"
-                placeholder="Name"
+                name="firstName"
+                placeholder="First name"
                 className={styles.contactus_input}
-                value={form.name}
+                value={form.firstName}
                 onChange={handleChange}
                 autoComplete="off"
               />
-              {errors.name && <p className={styles.contactus_error}>{errors.name}</p>}
+              {errors.firstName && <p className={styles.contactus_error}>{errors.firstName}</p>}
             </div>
 
             <div className={styles.contactus_field_group}>
               <input
                 type="text"
-                name="company"
-                placeholder="Company"
+                name="lastName"
+                placeholder="Last name"
                 className={styles.contactus_input}
-                value={form.company}
+                value={form.lastName}
                 onChange={handleChange}
                 autoComplete="off"
               />
+              {errors.lastName && <p className={styles.contactus_error}>{errors.lastName}</p>}
             </div>
           </div>
 
@@ -155,7 +138,7 @@ const ContactUs = () => {
                 classNamePrefix="contactus_select"
                 options={projectOptions}
                 value={projectOptions.find(option => option.value === form.projectType) || null}
-                onChange={option => setForm({ ...form, projectType: option ? option.value : '' })}
+                onChange={handleSelectChange('projectType')}
                 placeholder="Project Type"
                 isClearable
                 formatOptionLabel={option => (
@@ -175,7 +158,7 @@ const ContactUs = () => {
                 classNamePrefix="contactus_select"
                 options={countryOptions}
                 value={countryOptions.find(option => option.value === form.country) || null}
-                onChange={handleCountrySelect}
+                onChange={handleSelectChange('country')}
                 placeholder="Select Country"
                 isClearable
                 formatOptionLabel={option => (
@@ -204,7 +187,6 @@ const ContactUs = () => {
           </div>
 
           <button type="submit" className={styles.contactus_submit}>Submit</button>
-
           <p className={styles.contactus_hint}>Still overthinking it? Just type 'hi' - we'll take it from there.</p>
         </form>
       </div>
