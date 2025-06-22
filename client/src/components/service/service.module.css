@@ -17,7 +17,6 @@
   align-items: center;
   flex-direction: column;
   gap: 14px;
-  width: 80%;
 }
 
 .service_title {
@@ -650,7 +649,7 @@
 
   .service_header_description {
     font-size: 14px;
-    width: 100%;
+    width: 90%;
   }
 
   .service_content_wrapper {

@@ -17,7 +17,6 @@
   align-items: center;
   flex-direction: column;
   gap: 14px;
-  width: 80%;
 }
 
 .value_title {
@@ -450,7 +449,7 @@
     gap: 10px;
   }
 
-  .service_header_description {
+  .value_header_description {
     width: 80%;
   }
 }
@@ -471,7 +470,7 @@
 
   .value_header_description {
     font-size: 14px;
-    width: 100%;
+    width: 90%;
   }
 
   .value_content_wrapper {
