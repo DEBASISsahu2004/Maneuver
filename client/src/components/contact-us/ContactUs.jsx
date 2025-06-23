@@ -29,7 +29,7 @@ const ContactUs = () => {
   const handleSelectChange = (field) => (option) => {
     setForm((prev) => ({
       ...prev,
-      [field]: field === 'country' ? (option ? option.label : '') : (option ? option.value : '')
+      [field]: option ? option.value : ''
     }));
     setErrors((prev) => ({ ...prev, [field]: '' }));
   };
@@ -48,14 +48,30 @@ const ContactUs = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     setErrors(validationErrors);
-    
     if (Object.keys(validationErrors).length === 0) {
-      console.log('Form submitted:', form);
-      setForm(initialForm);
+      try {
+        const response = await fetch("http://localhost:5000/contactus", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(form),
+        });
+        if (response.ok) {
+          setForm(initialForm);
+          alert("Thank you! Your message has been sent.");
+        } else {
+          const data = await response.json();
+          alert(data.error || "Failed to send message. Please try again later.");
+        }
+      } catch (err) {
+        alert("Network error. Please try again later.");
+        console.error("Error submitting form:", err);
+      }
     } else {
       console.info('Form validation failed:', validationErrors);
     }
