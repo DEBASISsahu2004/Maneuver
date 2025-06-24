@@ -101,4 +101,6 @@ textarea,
 select {
   outline: none;
   border: none;
+  cursor: url('/pointer-cursor.svg'), auto;
 }
+

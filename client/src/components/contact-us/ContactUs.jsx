@@ -21,6 +21,7 @@ const initialForm = {
 const ContactUs = () => {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,6 +53,7 @@ const ContactUs = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     const validationErrors = validateForm();
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
@@ -67,19 +69,22 @@ const ContactUs = () => {
           },
           body: JSON.stringify(formWithTimezone),
         });
+
+        const data = await response.json();
+        setIsSubmitting(false);
         if (response.ok) {
           setForm(initialForm);
-          alert("Thank you! Your message has been sent.");
+          console.log("Thank you! Your message has been sent.");
         } else {
-          const data = await response.json();
-          alert(data.error || "Failed to send message. Please try again later.");
+          console.error("Error response:", data);
         }
       } catch (err) {
-        alert("Network error. Please try again later.");
+        setIsSubmitting(false);
         console.error("Error submitting form:", err);
       }
     } else {
-      console.info('Form validation failed:', validationErrors);
+      setIsSubmitting(false);
+      console.error("Validation errors:", validationErrors);
     }
   };
 
@@ -207,8 +212,20 @@ const ContactUs = () => {
               {errors.message && <p className={styles.contactus_error}>{errors.message}</p>}
             </div>
           </div>
-
-          <button type="submit" className={styles.contactus_submit}>Submit</button>
+          <button
+            type="submit"
+            className={styles.contactus_submit}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                Submitting
+                <span className={styles.dot}>.</span>
+                <span className={styles.dot}>.</span>
+                <span className={styles.dot}>.</span>
+              </>
+            ) : 'Submit'}
+          </button>
           <p className={styles.contactus_hint}>Still overthinking it? Just type 'hi' - we'll take it from there.</p>
         </form>
       </div>

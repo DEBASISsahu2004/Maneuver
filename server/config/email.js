@@ -12,8 +12,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Add timezone support to clientHtml and teamHtml
-const clientHtml = (firstName, lastName, timezone = "UTC") => `
+const clientHtml = (firstName, lastName) => `
   <div style="font-family: 'Segoe UI', Arial, sans-serif; color: #222; background: #f9f9f9; padding: 32px; border-radius: 12px; max-width: 600px; margin: auto;">
     <h2 style="color: #1a1a1a; margin-bottom: 16px;">👋 Hey ${firstName} ${lastName},</h2>
     <p style="font-size: 17px; margin-bottom: 18px;">We're not the <span style="font-style: italic; color: #888;">"thanks for reaching out, we'll be back in 2-3 business days"</span> kind of team. We're more like <span style="font-weight: bold; color: #0077cc;">"let's build something unforgettable together"</span> type.</p>
@@ -22,7 +21,8 @@ const clientHtml = (firstName, lastName, timezone = "UTC") => `
     <a href="https://maneuverstudios.com" style="display: inline-block; margin-top: 18px; padding: 10px 22px; background: #0077cc; color: #fff; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 16px;">Visit Our Website</a>
     <div style="font-size: 13px; color: #888; margin-top: 32px; text-align: right;">
       <p style="margin: 0;">Maneuver Studios</p>
-      <p style="margin: 0;">${new Date().toLocaleString("en-US", { timeZone: timezone })}</p>
+      <p style="margin: 0;">For any further queries, contact <a href="mailto:contact@maneuverstudios.com" style="color: #0077cc; text-decoration: underline;">contact@maneuverstudios.com</a></p>
+      <p style="margin: 0;">${new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}</p>
     </div>
   </div>
 `;
@@ -33,8 +33,7 @@ const teamHtml = (
   email,
   projectType,
   country,
-  message,
-  timezone = "UTC"
+  message
 ) => `
   <div style="font-family: 'Segoe UI', Arial, sans-serif; color: #222; background: #f9f9f9; padding: 32px; border-radius: 12px; max-width: 600px; margin: auto;">
     <h2 style="color: #1a1a1a; margin-bottom: 12px;">🚀 New Contact Form Submission</h2>
@@ -62,7 +61,9 @@ const teamHtml = (
     </table>
     <div style="font-size: 13px; color: #888; margin-top: 24px;">
       <p style="margin: 0;">This message was sent from the <a href="https://maneuverstudios.com" style="color: #0077cc; text-decoration: underline;">Maneuver Studios</a> website contact form.</p>
-      <p style="margin: 0;">${new Date().toLocaleString("en-US", { timeZone: timezone })}</p>
+      <p style="margin: 0;">${new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata",
+      })}</p>
     </div>
   </div>
 `;
@@ -70,10 +71,9 @@ const teamHtml = (
 const sendEmail = async (to, mailType, data = {}) => {
   let subject = "";
   let html = "";
-  const timezone = data.timezone || "UTC";
   if (mailType === "client") {
     subject = "Your Message Just Hit Our Radar";
-    html = clientHtml(data.firstName, data.lastName, timezone);
+    html = clientHtml(data.firstName, data.lastName);
   } else {
     subject = "New Contact Form Submission";
     html = teamHtml(
@@ -82,8 +82,7 @@ const sendEmail = async (to, mailType, data = {}) => {
       data.email,
       data.projectType,
       data.country,
-      data.message,
-      timezone
+      data.message
     );
   }
 
