@@ -60,7 +60,9 @@ const teamHtml = (
     </table>
     <div style="font-size: 13px; color: #888; margin-top: 24px;">
       <p style="margin: 0;">This message was sent from the <a href="https://maneuverstudios.com" style="color: #0077cc; text-decoration: underline;">Maneuver Studios</a> website contact form.</p>
-      <p style="margin: 0;">${new Date().toLocaleString()}</p>
+      <p style="margin: 0;">${new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata",
+      })}</p>
     </div>
   </div>
 `;
