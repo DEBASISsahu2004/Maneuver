@@ -7,6 +7,8 @@ import { projectList as projectOptions } from '../../utils/ProjectList.js';
 import CountryFlag from "react-country-flag";
 import { selectStyles } from '../../utils/selectStyles.js';
 
+const VITE_APP_API_URL = import.meta.env.VITE_APP_API_URL;
+
 const initialForm = {
   firstName: '',
   lastName: '',
@@ -54,7 +56,7 @@ const ContactUs = () => {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await fetch("http://localhost:5000/contactus", {
+        const response = await fetch(`${VITE_APP_API_URL}/contactus`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

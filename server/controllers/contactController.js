@@ -22,14 +22,15 @@ const handleContactForm = async (req, res) => {
 
   try {
     // Send email to your team
-    await sendEmail(process.env.EMAIL_USER, "team", {
-      firstName,
-      lastName,
-      email,
-      projectType,
-      country,
-      message,
-    });
+    // await sendEmail(process.env.EMAIL_USER, "team", {
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   projectType,
+    //   country,
+    //   message,
+    // });
+
     // Send email to client
     await sendEmail(email, "client", { firstName, lastName });
     res.json({ message: "Form submitted and emails sent successfully." });
