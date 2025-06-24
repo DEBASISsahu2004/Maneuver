@@ -6,22 +6,9 @@ const { contactValidation, handleContactForm } = require('./controllers/contactC
 const app = express();
 app.use(express.json());
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://maneuver-eta.vercel.app/",
-  "https://maneuverstudios.com"
-];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, curl, etc.)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: ["http://localhost:5173", "https://maneuver-eta.vercel.app"], // Add your frontend domain here
   methods: ["GET", "POST"],
   credentials: true,
 };
