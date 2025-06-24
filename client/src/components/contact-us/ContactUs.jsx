@@ -56,12 +56,16 @@ const ContactUs = () => {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       try {
+        // Get user's timezone from browser
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        // Add timezone to form data
+        const formWithTimezone = { ...form, timezone };
         const response = await fetch(`${VITE_APP_API_URL}/contactus`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(form),
+          body: JSON.stringify(formWithTimezone),
         });
         if (response.ok) {
           setForm(initialForm);
