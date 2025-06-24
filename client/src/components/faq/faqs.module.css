@@ -67,6 +67,7 @@
     justify-content: end;
     transition: all 0.3s ease-in-out;
     width: 100%;
+    cursor: url('/pointer-cursor.svg'), auto !important;
 }
 
 .faq_item:hover {
