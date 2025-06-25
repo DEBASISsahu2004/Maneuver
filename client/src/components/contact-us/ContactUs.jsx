@@ -6,6 +6,7 @@ import { countries as countryOptions } from '../../utils/CountryList.js';
 import { projectList as projectOptions } from '../../utils/ProjectList.js';
 import CountryFlag from "react-country-flag";
 import { selectStyles } from '../../utils/selectStyles.js';
+import { toast } from 'react-toastify';
 
 const VITE_APP_API_URL = import.meta.env.VITE_APP_API_URL;
 
@@ -74,17 +75,28 @@ const ContactUs = () => {
         setIsSubmitting(false);
         if (response.ok) {
           setForm(initialForm);
-          console.log("Thank you! Your message has been sent.");
+          toast.success("Thank you! Your message has been sent.");
         } else {
           console.error("Error response:", data);
+          if (data && data.errors && Array.isArray(data.errors)) {
+            // Validation errors from backend
+            toast.error(data.errors.map(e => e.msg).join("\n"));
+          } else if (data && data.error) {
+            // General backend error
+            toast.error(data.error);
+          } else {
+            toast.error("There was an error sending your message. Please try again later.");
+          }
         }
       } catch (err) {
         setIsSubmitting(false);
         console.error("Error submitting form:", err);
+        toast.error("There was a network or server error. Please try again later.");
       }
     } else {
       setIsSubmitting(false);
       console.error("Validation errors:", validationErrors);
+      toast.error("Please fix the errors in the form before submitting.");
     }
   };
 
