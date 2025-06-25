@@ -12,17 +12,26 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const clientHtml = (firstName, lastName) => `
+const teamEmails = [
+  "sahurocky524@gmail.com",
+  "tarun.bisoi29@gmail.com",
+  "ashutoshash.az22@gmail.com",
+];
+
+const clientHtml = (firstName, lastName, timezone) => `
   <div style="font-family: 'Segoe UI', Arial, sans-serif; color: #222; background: #f9f9f9; padding: 32px; border-radius: 12px; max-width: 600px; margin: auto;">
     <h2 style="color: #1a1a1a; margin-bottom: 16px;">👋 Hey ${firstName} ${lastName},</h2>
-    <p style="font-size: 17px; margin-bottom: 18px;">We're not the <span style="font-style: italic; color: #888;">"thanks for reaching out, we'll be back in 2-3 business days"</span> kind of team. We're more like <span style="font-weight: bold; color: #0077cc;">"let's build something unforgettable together"</span> type.</p>
-    <p style="font-size: 16px; margin-bottom: 10px;">Your message just landed, and we'll reach out within the next <span style="font-weight: bold; color: #0077cc;">12-18 hours</span>—with intent, not templates.</p>
+    <p style="font-size: 17px; margin-bottom: 18px;">We're not the <span style="font-style: italic; color: #888;">"thanks for reaching out, we'll be back in 2-3 business days"</span> kind of team. We're more like <span style="font-weight: bold; color: #B70404;">"let's build something unforgettable together"</span> type.</p>
+    <p style="font-size: 16px; margin-bottom: 10px;">Your message just landed, and we'll reach out within the next <span style="font-weight: bold; color: #B70404;">12-18 hours</span>—with intent, not templates.</p>
     <p style="font-size: 16px; margin-bottom: 18px;">Sit tight. We got you.</p>
-    <a href="https://maneuverstudios.com" style="display: inline-block; margin-top: 18px; padding: 10px 22px; background: #0077cc; color: #fff; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 16px;">Visit Our Website</a>
+    <a href="https://maneuverstudios.com" style="display: inline-block; margin-top: 18px; padding: 10px 22px; background: #B70404; color: #fff; border-radius: 6px; text-decoration: none; font-weight: 500; font-size: 16px;">Visit Our Website</a>
     <div style="font-size: 13px; color: #888; margin-top: 32px; text-align: right;">
       <p style="margin: 0;">Maneuver Studios</p>
-      <p style="margin: 0;">For any further queries, contact <a href="mailto:contact@maneuverstudios.com" style="color: #0077cc; text-decoration: underline;">contact@maneuverstudios.com</a></p>
-      <p style="margin: 0;">${new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}</p>
+      <p style="margin: 0;">${
+        timezone
+          ? new Date().toLocaleString("en-US", { timeZone: timezone })
+          : new Date().toLocaleString()
+      }</p>
     </div>
   </div>
 `;
@@ -44,7 +53,7 @@ const teamHtml = (
       </tr>
       <tr>
         <td style="font-weight: bold; padding: 6px 0;">Email:</td>
-        <td style="padding: 6px 0;"><a href="mailto:${email}" style="color: #0077cc; text-decoration: none;">${email}</a></td>
+        <td style="padding: 6px 0;"><a href="mailto:${email}" style="color: #B70404; text-decoration: none;">${email}</a></td>
       </tr>
       <tr>
         <td style="font-weight: bold; padding: 6px 0;">Project Type:</td>
@@ -60,42 +69,49 @@ const teamHtml = (
       </tr>
     </table>
     <div style="font-size: 13px; color: #888; margin-top: 24px;">
-      <p style="margin: 0;">This message was sent from the <a href="https://maneuverstudios.com" style="color: #0077cc; text-decoration: underline;">Maneuver Studios</a> website contact form.</p>
-      <p style="margin: 0;">${new Date().toLocaleString("en-US", {
-        timeZone: "Asia/Kolkata",
-      })}</p>
+      <p style="margin: 0;">This message was sent from the <a href="https://maneuverstudios.com" style="color: #B70404; text-decoration: underline;">Maneuver Studios</a> website contact form.</p>
+      <p style="margin: 0;">${new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}</p>
     </div>
   </div>
 `;
 
-const sendEmail = async (to, mailType, data = {}) => {
-  let subject = "";
-  let html = "";
-  if (mailType === "client") {
-    subject = "Your Message Just Hit Our Radar";
-    html = clientHtml(data.firstName, data.lastName);
-  } else {
-    subject = "New Contact Form Submission";
-    html = teamHtml(
-      data.firstName,
-      data.lastName,
-      data.email,
-      data.projectType,
-      data.country,
-      data.message
-    );
-  }
-
-  const mailOptions = {
+const sendEmail = async (clientEmail, data = {}) => {
+  // Send to client
+  let clientSubject = "Your Message Just Hit Our Radar";
+  let clientHtmlContent = clientHtml(data.firstName, data.lastName, data.timezone);
+  const clientMailOptions = {
     from: process.env.EMAIL_USER,
-    to,
-    subject,
-    html,
+    to: clientEmail,
+    subject: clientSubject,
+    html: clientHtmlContent,
   };
 
+  // Send to all team members
+  let teamSubject = "New Contact Form Submission";
+  let teamHtmlContent = teamHtml(
+    data.firstName,
+    data.lastName,
+    data.email,
+    data.projectType,
+    data.country,
+    data.message
+  );
+
   try {
-    await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully");
+    // Send to client
+    await transporter.sendMail(clientMailOptions);
+    // Send to all team members in parallel for speed
+    await Promise.all(
+      teamEmails.map((teamEmail) =>
+        transporter.sendMail({
+          from: process.env.EMAIL_USER,
+          to: teamEmail,
+          subject: teamSubject,
+          html: teamHtmlContent,
+        })
+      )
+    );
+    console.log("All emails sent successfully");
   } catch (error) {
     console.log("Error sending email:", error);
     throw error;
