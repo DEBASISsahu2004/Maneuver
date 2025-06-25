@@ -10,7 +10,8 @@ app.use(express.json());
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "https://maneuver-eta.vercel.app"
+    "https://maneuver-eta.vercel.app",
+    "https://www.maneuverstudios.com"
   ],
   methods: ["GET", "POST"],
   credentials: true,
