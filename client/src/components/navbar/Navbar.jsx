@@ -50,7 +50,7 @@ const Navbar = () => {
   const isDesktop = windowWidth > 900;
 
   return (
-    <nav className={styles.navbar_container} data-aos="fade-up" data-aos-duration="1500">
+    <nav className={styles.navbar_container} {...(isDesktop ? { 'data-aos': 'fade-down', 'data-aos-duration': '1500' } : {})}>
       <div className={styles.navbar}>
         {isDesktop ? (
           <>
