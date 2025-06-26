@@ -47,12 +47,17 @@
 }
 
 .faqs_content_wrapper {
-    position: relative; 
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    height: fit-content;
+}
+
+.faqs_content {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    overflow: hidden;
-    width: 80%;
+    width: 100%;
 }
 
 .faq_item {
@@ -122,8 +127,8 @@
 .faqs_stars {
     position: absolute;
     left: 50%;
-    bottom: -230px;
-    transform: translateX(-50%);
+    top: 100%;
+    transform: translate(-50%, -50%);
     width: 500px;
     z-index: 1;
     animation: rotateStar 20s linear infinite;
@@ -131,11 +136,11 @@
 
 @keyframes rotateStar {
     0% {
-        transform: translateX(-50%) rotate(0deg);
+        transform: translate(-50%, -50%) rotate(0deg);
     }
 
     100% {
-        transform: translateX(-50%) rotate(360deg);
+        transform: translate(-50%, -50%) rotate(360deg);
     }
 }
 

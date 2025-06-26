@@ -41,29 +41,33 @@ const Faqs = () => {
     return (
         <section id="faqs" className={styles.faqs_container}>
             <div className={styles.faqs_header_container}>
-                <h2 className={styles.faqs_title}>Frequently Asked Questions</h2>
-                <p className={styles.faqs_header_subtitle}>Still Wondering?</p>
-                <p className={styles.faqs_header_description}>We believe in transparency, not surprises. Here's what most clients ask us before starting.</p>
+                <h2 className={styles.faqs_title} data-aos="fade-up" data-aos-duration="1500">Frequently Asked Questions</h2>
+                <p className={styles.faqs_header_subtitle} data-aos="fade-up" data-aos-duration="1500">Still Wondering?</p>
+                <p className={styles.faqs_header_description} data-aos="fade-up" data-aos-duration="1500">We believe in transparency, not surprises. Here's what most clients ask us before starting.</p>
             </div>
 
-            <div className={styles.faqs_content_wrapper}>
-                {faqs.map((faq, index) => (
-                    <div key={index} className={styles.faq_item} onClick={() => handleToggle(index)}>
-                        <div className={styles.faq_question_container}>
-                            <h3 className={styles.faq_question}>{faq.question}</h3>
-                            <img
-                                className={styles.faq_icon}
-                                src={openIndex === index ? Subtract : Add}
-                                alt="toggle icon"
-                                style={{ transform: openIndex === index ? 'rotate(180deg)' : 'none' }}
-                            />
+            <div className={styles.faqs_content_wrapper} data-aos="fade-up" data-aos-duration="1500">
+                <div className={styles.faqs_content}>
+                    {faqs.map((faq, index) => (
+                        <div key={index} className={styles.faq_item} onClick={() => handleToggle(index)} data-aos="fade-up" data-aos-duration="1500" >
+                            <div className={styles.faq_question_container}>
+                                <h3 className={styles.faq_question}>{faq.question}</h3>
+                                <img
+                                    className={styles.faq_icon}
+                                    src={openIndex === index ? Subtract : Add}
+                                    alt="toggle icon"
+                                    style={{ transform: openIndex === index ? 'rotate(180deg)' : 'none' }}
+                                />
+                            </div>
+                            <p className={`${styles.faq_answer} ${openIndex === index ? styles.active : styles.inactive}`}>
+                                {faq.answer}
+                            </p>
                         </div>
-                        <p className={`${styles.faq_answer} ${openIndex === index ? styles.active : styles.inactive}`}>
-                            {faq.answer}
-                        </p>
-                    </div>
-                ))}
-                <img className={styles.faqs_stars} src={Star} alt="star group" />
+                    ))}
+                </div>
+                <div>
+                    <img className={styles.faqs_stars} src={Star} alt="star group" />
+                </div>
             </div>
         </section>
     )

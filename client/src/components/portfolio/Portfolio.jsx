@@ -9,20 +9,16 @@ import McBgOne from '../../assets/images/portfolio/mc-bg-one.png';
 import McBgTwo from '../../assets/images/portfolio/mc-bg-two.png';
 import PmcBgOne from '../../assets/images/portfolio/pmc-bg-one.png';
 import PmcBgTwo from '../../assets/images/portfolio/pmc-bg-two.png';
-// import StrideBgOne from '../../assets/images/portfolio/stride-bg-one.png';
-// import StrideBgTwo from '../../assets/images/portfolio/stride-bg-two.png';
 
 import PrintSaathiHome from '../../assets/icons/portfolio/print-saathi-home.svg';
 import NoMondayHome from '../../assets/icons/portfolio/nomonday-home.svg';
 import MejocareHome from '../../assets/icons/portfolio/mejocare-home.svg';
 import PMCHome from '../../assets/icons/portfolio/pragmatic-home.svg';
-// import StrideHome from '../../assets/icons/portfolio/stride-home.svg';
 
 import PrintSaathiLogo from '../../assets/icons/portfolio/print-saathi.svg';
 import NoMondayLogo from '../../assets/icons/portfolio/no-monday.svg';
 import MejocareLogo from '../../assets/icons/portfolio/mejocare.svg';
 import PMCLogo from '../../assets/icons/portfolio/pmc.svg';
-// import StrideLogo from '../../assets/icons/portfolio/stride.svg';
 
 import AvatarFemaleOne from '../../assets/icons/portfolio/avatar-female-one.svg';
 import AvatarFemaleTwo from '../../assets/icons/portfolio/avatar-female-two.svg';
@@ -111,11 +107,11 @@ const projectData = [
 const Portfolio = () => {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    // Carousel auto-advance every 15 seconds
+    // Carousel auto-advance every 10 seconds
     useEffect(() => {
         const timer = setInterval(() => {
             setActiveIndex((prev) => (prev + 1) % projectData.length);
-        }, 15000);
+        }, 10000);
         return () => clearInterval(timer);
     }, []);
 
@@ -123,12 +119,12 @@ const Portfolio = () => {
     return (
         <section id="portfolio" className={styles.portfolio_container}>
             <div className={styles.portfolio_header_container}>
-                <h2 className={styles.portfolio_title}>Portfolio</h2>
-                <p className={styles.portfolio_header_subtitle}>Built on Trust</p>
-                <p className={styles.portfolio_header_description}>From startups to seasoned brands - we've helped them scale, stand out, and stay ahead. Their feedback speak for us.</p>
+                <h2 className={styles.portfolio_title} data-aos="fade-up" data-aos-duration="1500">Portfolio</h2>
+                <p className={styles.portfolio_header_subtitle} data-aos="fade-up" data-aos-duration="1500">Built on Trust</p>
+                <p className={styles.portfolio_header_description} data-aos="fade-up" data-aos-duration="1500">From startups to seasoned brands - we've helped them scale, stand out, and stay ahead. Their feedback speak for us.</p>
             </div>
 
-            <div className={styles.portfolio_content_wrapper}>
+            <div className={styles.portfolio_content_wrapper} data-aos="fade-up" data-aos-duration="1500">
                 <div className={styles.portfolio_project_card}>
                     <div className={styles.portfolio_project_images}>
                         <img className={styles[`portfolio_project_bg_${activeProject.title.replace(/\s+/g, '').toLowerCase()}1`]} src={activeProject.bg1} alt={activeProject.title + ' bg'} />
@@ -166,7 +162,7 @@ const Portfolio = () => {
                     </div>
                 </div>
 
-                <div className={styles.portfolio_logos_wrapper}>
+                <div className={styles.portfolio_logos_wrapper} data-aos="fade-up" data-aos-duration="1500">
                     {projectData.map((project, idx) => (
                         <button
                             key={project.title}

@@ -125,7 +125,7 @@ const valueCards = [
 ];
 
 const ValueCard = ({ title, desc, animation }) => (
-    <div className={styles.value_card}>
+    <div className={styles.value_card} data-aos="fade-up" data-aos-duration="1500">
         <h3 className={styles.value_card_title}>{title}</h3>
         <div className={styles.value_card_animation}>{animation}</div>
         <p className={styles.value_card_desc}>{desc}</p>
@@ -136,9 +136,9 @@ const Value = () => {
     return (
         <section id="values" className={styles.value_container}>
             <div className={styles.value_header_container}>
-                <h2 className={styles.value_title}>Values</h2>
-                <p className={styles.value_header_subtitle}>What sets us apart?</p>
-                <p className={styles.value_header_description}>We don't just deliver - we think, build, and evolve with purpose. Here's what defines the way we work.</p>
+                <h2 className={styles.value_title} data-aos="fade-up" data-aos-duration="1500">Values</h2>
+                <p className={styles.value_header_subtitle} data-aos="fade-up" data-aos-duration="1500">What sets us apart?</p>
+                <p className={styles.value_header_description} data-aos="fade-up" data-aos-duration="1500">We don't just deliver - we think, build, and evolve with purpose. Here's what defines the way we work.</p>
             </div>
             <div className={styles.value_content_wrapper}>
                 {valueCards.map(({ key, ...rest }) => (

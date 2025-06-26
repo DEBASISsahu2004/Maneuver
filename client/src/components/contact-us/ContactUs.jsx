@@ -105,12 +105,12 @@ const ContactUs = () => {
   return (
     <section id="contactus" className={styles.contactus_container}>
       <div className={styles.contactus_header_container}>
-        <h2 className={styles.contactus_title}>Contact Us</h2>
-        <p className={styles.contactus_header_subtitle}>Let's Talk Ideas</p>
-        <p className={styles.contactus_header_description}>Whether you've got a brief or just a bold idea, we're all ears. Let's explore how we can help.</p>
+        <h2 className={styles.contactus_title} data-aos="fade-up" data-aos-duration="1500">Contact Us</h2>
+        <p className={styles.contactus_header_subtitle} data-aos="fade-up" data-aos-duration="1500">Let's Talk Ideas</p>
+        <p className={styles.contactus_header_description} data-aos="fade-up" data-aos-duration="1500">Whether you've got a brief or just a bold idea, we're all ears. Let's explore how we can help.</p>
       </div>
 
-      <div className={styles.contactus_content_wrapper}>
+      <div className={styles.contactus_content_wrapper} data-aos="fade-up" data-aos-duration="1500">
         <div className={styles.contactus_animation_container}>
           <img className={styles.notification} src={Noti} alt="notification" />
 

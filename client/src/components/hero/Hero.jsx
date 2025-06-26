@@ -5,21 +5,21 @@ const Hero = () => {
     return (
         <section id="home" className={styles.hero_container}>
             <div className={styles.hero_content}>
-                <h1 className={styles.hero_title}>maneuver</h1>
-                <h2 className={styles.hero_subtitle}>
+                <h1 className={styles.hero_title} data-aos="fade-up" data-aos-duration="1500" >maneuver</h1>
+                <h2 className={styles.hero_subtitle} data-aos="fade-up" data-aos-duration="1500" >
                     We turn your vision into stunning, <br /> streamlined digital experiences
                 </h2>
-                <p className={styles.hero_description}>
+                <p className={styles.hero_description} data-aos="fade-up" data-aos-duration="1500" >
                     Through strategy, sleek visuals, and clean code, we help startups and growing brands turn traffic into real results.
                 </p>
-                <p className={styles.hero_quote}>— Built by creatives who care about clarity & conversion.</p>
-                <div className={styles.hero_buttons}>
+                <p className={styles.hero_quote} data-aos="fade-up" data-aos-duration="1500" >— Built by creatives who care about clarity & conversion.</p>
+                <div className={styles.hero_buttons} data-aos="fade-up" data-aos-duration="1500" >
                     <a href="#contactus" className={styles.hero_button_primary}>Get Started</a>
                     <a href="#portfolio" className={styles.hero_button_secondary}>Explore Our Work</a>
                 </div>
             </div>
 
-            <div className={styles.hero_image}>
+            <div className={styles.hero_image} data-aos="zoom-in-up" data-aos-duration="1500">
                 <img src={StarSketch} alt="StarSketch" />
             </div>
         </section>

@@ -50,7 +50,7 @@ const Navbar = () => {
   const isDesktop = windowWidth > 900;
 
   return (
-    <nav className={styles.navbar_container}>
+    <nav className={styles.navbar_container} data-aos="fade-up" data-aos-duration="1500">
       {isDesktop ? (
         <>
           <a className={styles.navbar_hero_link} href="#home">mnvr.</a>

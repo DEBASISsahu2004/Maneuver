@@ -116,7 +116,7 @@ const serviceCards = [
 ];
 
 const ServiceCard = ({ title, desc, content, cardClass }) => (
-  <div className={`${cardClass} ${styles.service_card}`}>
+  <div className={`${cardClass} ${styles.service_card}`} data-aos="fade-up" data-aos-duration="1500">
     <div className={styles.service_card_content}>
       <h3 className={styles.service_card_title}>{title}</h3>
       <p className={styles.service_card_desc}>{desc}</p>
@@ -129,9 +129,9 @@ const Service = () => {
   return (
     <section id="services" className={styles.service_container}>
       <div className={styles.service_header_container}>
-        <h2 className={styles.service_title}>Services</h2>
-        <p className={styles.service_header_subtitle}>Everything you need to outmaneuver the competition</p>
-        <p className={styles.service_header_description}>Every move we make is intentional. Designed to position your brand, engage your users & drive performance.</p>
+        <h2 className={styles.service_title} data-aos="fade-up" data-aos-duration="1500">Services</h2>
+        <p className={styles.service_header_subtitle} data-aos="fade-up" data-aos-duration="1500">Everything you need to outmaneuver the competition</p>
+        <p className={styles.service_header_description} data-aos="fade-up" data-aos-duration="1500">Every move we make is intentional. Designed to position your brand, engage your users & drive performance.</p>
       </div>
       <div className={styles.service_content_wrapper}>
         {serviceCards.map(({ key, ...rest }) => (
