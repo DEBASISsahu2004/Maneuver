@@ -18,30 +18,10 @@ const handleContactForm = async (req, res) => {
   }
 
   // Get timezone from request body (if present)
-  const {
-    firstName,
-    lastName,
-    email,
-    projectType,
-    country,
-    message,
-    timezone,
-  } = req.body;
+  const data = req.body;
 
   try {
-    // Send email to your team
-    await sendEmail(process.env.EMAIL_USER, "team", {
-      firstName,
-      lastName,
-      email,
-      projectType,
-      country,
-      message,
-      timezone,
-    });
-
-    // Send email to client
-    await sendEmail(email, { firstName, lastName, timezone });
+    await sendEmail(data);
     res.json({ message: "Form submitted and emails sent successfully." });
   } catch (err) {
     console.error("Email sending error:", err);

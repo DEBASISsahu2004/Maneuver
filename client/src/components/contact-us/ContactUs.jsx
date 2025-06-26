@@ -55,8 +55,10 @@ const ContactUs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
     const validationErrors = validateForm();
     setErrors(validationErrors);
+
     if (Object.keys(validationErrors).length === 0) {
       try {
         // Get user's timezone from browser

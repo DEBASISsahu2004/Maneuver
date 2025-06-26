@@ -70,25 +70,39 @@ const teamHtml = (
     </table>
     <div style="font-size: 13px; color: #888; margin-top: 24px;">
       <p style="margin: 0;">This message was sent from the <a href="https://maneuverstudios.com" style="color: #B70404; text-decoration: underline;">Maneuver Studios</a> website contact form.</p>
-      <p style="margin: 0;">${new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })}</p>
+      <p style="margin: 0;">${new Date().toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata",
+      })}</p>
     </div>
   </div>
 `;
 
-const sendEmail = async (clientEmail, data = {}) => {
+const sendEmail = async (data = {}) => {
   // Send to client
-  let clientSubject = "Your Message Just Hit Our Radar";
-  let clientHtmlContent = clientHtml(data.firstName, data.lastName, data.timezone);
+  const clientSubject = "Your Message Just Hit Our Radar";
+  const clientHtmlContent = clientHtml(
+    data.firstName,
+    data.lastName,
+    data.timezone
+  );
   const clientMailOptions = {
     from: process.env.EMAIL_USER,
-    to: clientEmail,
+    to: data.email,
     subject: clientSubject,
     html: clientHtmlContent,
   };
 
-  // Send to all team members
-  let teamSubject = "New Contact Form Submission";
-  let teamHtmlContent = teamHtml(
+  try {
+    await transporter.sendMail(clientMailOptions);
+  } catch (err) {
+    throw new Error(
+      "Failed to send confirmation email to client: " + err.message
+    );
+  }
+
+  // Send to all team members in parallel
+  const teamSubject = "New Contact Form Submission";
+  const teamHtmlContent = teamHtml(
     data.firstName,
     data.lastName,
     data.email,
@@ -96,26 +110,17 @@ const sendEmail = async (clientEmail, data = {}) => {
     data.country,
     data.message
   );
-
-  try {
-    // Send to client
-    await transporter.sendMail(clientMailOptions);
-    // Send to all team members in parallel for speed
-    await Promise.all(
-      teamEmails.map((teamEmail) =>
-        transporter.sendMail({
-          from: process.env.EMAIL_USER,
-          to: teamEmail,
-          subject: teamSubject,
-          html: teamHtmlContent,
-        })
-      )
-    );
-    console.log("All emails sent successfully");
-  } catch (error) {
-    console.log("Error sending email:", error);
-    throw error;
-  }
+  
+  const teamResults = await Promise.allSettled(
+    teamEmails.map((teamEmail) =>
+      transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: teamEmail,
+        subject: teamSubject,
+        html: teamHtmlContent,
+      })
+    )
+  );
 };
 
 module.exports = { sendEmail };
