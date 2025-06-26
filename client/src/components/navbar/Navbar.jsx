@@ -51,31 +51,33 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar_container} data-aos="fade-up" data-aos-duration="1500">
-      {isDesktop ? (
-        <>
-          <a className={styles.navbar_hero_link} href="#home">mnvr.</a>
-          {NAV_LINKS.map(link => (
-            <a key={link.href} className={styles.navbar_link} href={link.href}>{link.label}</a>
-          ))}
-          <a className={styles.navbar_appointment_link} href="#contactus">
-            Book an appointment
-            <img className={styles.arrow} src={CircleArrow} alt="arrow" />
-          </a>
-        </>
-      ) : (
-        <>
-          <a className={styles.navbar_hero_link} href="#home">m.</a>
-          {NAV_LINKS.map(link => (
-            <a key={link.href} className={styles.navbar_link} href={link.href}>
-              <img src={link.icon} alt={link.alt} />
+      <div className={styles.navbar}>
+        {isDesktop ? (
+          <>
+            <a className={styles.navbar_hero_link} href="#home">mnvr.</a>
+            {NAV_LINKS.map(link => (
+              <a key={link.href} className={styles.navbar_link} href={link.href}>{link.label}</a>
+            ))}
+            <a className={styles.navbar_appointment_link} href="#contactus">
+              Book an appointment
+              <img className={styles.arrow} src={CircleArrow} alt="arrow" />
             </a>
-          ))}
-          <a className={styles.navbar_appointment_link} href="#contactus">
-            Appointment
-            <img className={styles.arrow} src={CircleArrow} alt="arrow" />
-          </a>
-        </>
-      )}
+          </>
+        ) : (
+          <>
+            <a className={styles.navbar_hero_link} href="#home">m.</a>
+            {NAV_LINKS.map(link => (
+              <a key={link.href} className={styles.navbar_link} href={link.href}>
+                <img src={link.icon} alt={link.alt} />
+              </a>
+            ))}
+            <a className={styles.navbar_appointment_link} href="#contactus">
+              Appointment
+              <img className={styles.arrow} src={CircleArrow} alt="arrow" />
+            </a>
+          </>
+        )}
+      </div>
     </nav>
   )
 }

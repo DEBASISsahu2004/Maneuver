@@ -1,11 +1,15 @@
 .navbar_container {
   position: sticky;
+  width: 100%;
+  top: 20px;
+  z-index: 5000;
+}
+
+.navbar {
   display: flex;
   align-items: center;
   width: fit-content;
   height: fit-content;
-  top: 20px;
-  z-index: 5000;
   margin: 0 auto;
   padding: 6px;
   gap: 20px;
@@ -69,9 +73,7 @@
   .navbar_container {
     position: fixed;
     top: auto;
-    left: 50%;
-    bottom: 10px;
-    transform: translateX(-50%);
+    bottom: 20px;
   }
 
   .navbar_hero_link {
@@ -95,7 +97,7 @@
 }
 
 @media (max-width: 600px) {
-  .navbar_container {
+  .navbar {
     gap: 10px;
   }
 
