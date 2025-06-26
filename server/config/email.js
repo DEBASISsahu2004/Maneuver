@@ -86,7 +86,7 @@ const sendEmail = async (data = {}) => {
     data.timezone
   );
   const clientMailOptions = {
-    from: process.env.EMAIL_USER,
+    from: `Maneuver Studios <${process.env.EMAIL_USER}>`,
     to: data.email,
     subject: clientSubject,
     html: clientHtmlContent,
@@ -114,7 +114,7 @@ const sendEmail = async (data = {}) => {
   const teamResults = await Promise.allSettled(
     teamEmails.map((teamEmail) =>
       transporter.sendMail({
-        from: process.env.EMAIL_USER,
+        from: `Maneuver Studios <${process.env.EMAIL_USER}>`,
         to: teamEmail,
         subject: teamSubject,
         html: teamHtmlContent,
