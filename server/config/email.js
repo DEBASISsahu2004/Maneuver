@@ -1,43 +1,43 @@
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
-const parseBool = (v) => {
-  if (typeof v === "boolean") return v;
-  if (v == null) return false;
-  return String(v).toLowerCase() === "true";
-};
+const parseBool = (v) =>
+  v === true || (typeof v === "string" && v.toLowerCase() === "true");
 
-const EMAIL_HOST = process.env.EMAIL_HOST || "smtp.privateemail.com";
-const EMAIL_PORT = process.env.EMAIL_PORT ? parseInt(process.env.EMAIL_PORT, 10) : 587;
-const EMAIL_SECURE = parseBool(process.env.EMAIL_SECURE); 
+const EMAIL_HOST = process.env.EMAIL_HOST || "mail.privateemail.com";
+const EMAIL_PORT = process.env.EMAIL_PORT
+  ? parseInt(process.env.EMAIL_PORT, 10)
+  : 465;
+const EMAIL_SECURE = parseBool(process.env.EMAIL_SECURE);
 
 const transporter = nodemailer.createTransport({
   host: EMAIL_HOST,
   port: EMAIL_PORT,
   secure: EMAIL_SECURE,
-  requireTLS: !EMAIL_SECURE,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  pool: true,
-  maxConnections: 5,
-  maxMessages: 100,
-  connectionTimeout: 15000,
-  greetingTimeout: 5000,
-  socketTimeout: 15000,
-  logger: false,
-  debug: process.env.NODE_ENV !== "production",
-  tls: {
-    // allow override via env for debugging only
-    rejectUnauthorized: parseBool(process.env.EMAIL_TLS_REJECT_UNAUTHORIZED) !== false,
-  },
+  logger: true,
+  debug: true,
 });
 
 // Verify SMTP connection at startup and log any errors so logs show the real cause
-transporter.verify()
-  .then(() => console.log("[email] SMTP connected", { host: EMAIL_HOST, port: EMAIL_PORT, secure: EMAIL_SECURE }))
-  .catch((err) => console.error("[email] SMTP verify failed:", err && err.message ? err.message : err));
+transporter
+  .verify()
+  .then(() =>
+    console.log("[email] SMTP connected", {
+      host: EMAIL_HOST,
+      port: EMAIL_PORT,
+      secure: EMAIL_SECURE,
+    })
+  )
+  .catch((err) =>
+    console.error(
+      "[email] SMTP verify failed:",
+      err && err.message ? err.message : err
+    )
+  );
 
 const teamEmails = [
   "sahurocky524@gmail.com",
@@ -107,7 +107,11 @@ const teamHtml = (
 const sendEmail = async (data = {}) => {
   // Send to client
   const clientSubject = "Your Message Just Hit Our Radar";
-  const clientHtmlContent = clientHtml(data.firstName, data.lastName, data.timezone);
+  const clientHtmlContent = clientHtml(
+    data.firstName,
+    data.lastName,
+    data.timezone
+  );
   const clientMailOptions = {
     from: `Maneuver Studios <${process.env.EMAIL_USER}>`,
     to: data.email,
@@ -119,8 +123,13 @@ const sendEmail = async (data = {}) => {
     await transporter.sendMail(clientMailOptions);
     console.log("[email] sent client confirmation via SMTP to", data.email);
   } catch (err) {
-    console.error("[email] SMTP send to client failed:", err && err.message ? err.message : err);
-    throw new Error("Failed to send confirmation email to client: " + (err.message || err));
+    console.error(
+      "[email] SMTP send to client failed:",
+      err && err.message ? err.message : err
+    );
+    throw new Error(
+      "Failed to send confirmation email to client: " + (err.message || err)
+    );
   }
 
   // Send to all team members in parallel using SMTP
@@ -146,7 +155,10 @@ const sendEmail = async (data = {}) => {
         console.log(`[email] sent team email to ${teamEmail}`);
         return res;
       } catch (teamErr) {
-        console.error(`[email] SMTP send to ${teamEmail} failed:`, teamErr && teamErr.message ? teamErr.message : teamErr);
+        console.error(
+          `[email] SMTP send to ${teamEmail} failed:`,
+          teamErr && teamErr.message ? teamErr.message : teamErr
+        );
         throw teamErr;
       }
     })
