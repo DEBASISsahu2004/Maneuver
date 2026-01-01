@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-const https = require("https");
 require("dotenv").config();
 
 const parseBool = (v) => {
@@ -9,20 +8,24 @@ const parseBool = (v) => {
 };
 
 const EMAIL_HOST = process.env.EMAIL_HOST || "smtp.privateemail.com";
-const EMAIL_PORT = process.env.EMAIL_PORT ? parseInt(process.env.EMAIL_PORT, 10) : 465;
-const EMAIL_SECURE = parseBool(process.env.EMAIL_SECURE); // true for 465, false for 587
+const EMAIL_PORT = process.env.EMAIL_PORT ? parseInt(process.env.EMAIL_PORT, 10) : 587;
+const EMAIL_SECURE = parseBool(process.env.EMAIL_SECURE); 
 
 const transporter = nodemailer.createTransport({
   host: EMAIL_HOST,
   port: EMAIL_PORT,
   secure: EMAIL_SECURE,
+  requireTLS: !EMAIL_SECURE,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  connectionTimeout: 10000,
+  pool: true,
+  maxConnections: 5,
+  maxMessages: 100,
+  connectionTimeout: 15000,
   greetingTimeout: 5000,
-  socketTimeout: 10000,
+  socketTimeout: 15000,
   logger: false,
   debug: process.env.NODE_ENV !== "production",
   tls: {
@@ -102,43 +105,6 @@ const teamHtml = (
 `;
 
 const sendEmail = async (data = {}) => {
-  // helper: send via SendGrid HTTP API if API key is present
-  const sendWithSendGrid = async (to, subject, html) => {
-    const apiKey = process.env.SENDGRID_API_KEY;
-    if (!apiKey) throw new Error("SendGrid API key not configured");
-
-    const payload = JSON.stringify({
-      personalizations: [{ to: [{ email: to }] }],
-      from: { email: process.env.EMAIL_USER },
-      subject,
-      content: [{ type: "text/html", value: html }],
-    });
-
-    const options = {
-      hostname: "api.sendgrid.com",
-      port: 443,
-      path: "/v3/mail/send",
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "Content-Length": Buffer.byteLength(payload),
-      },
-    };
-
-    await new Promise((resolve, reject) => {
-      const req = https.request(options, (res) => {
-        if (res.statusCode && res.statusCode >= 200 && res.statusCode < 300) return resolve();
-        let body = "";
-        res.on("data", (chunk) => (body += chunk));
-        res.on("end", () => reject(new Error(`SendGrid error ${res.statusCode}: ${body}`)));
-      });
-      req.on("error", (e) => reject(e));
-      req.write(payload);
-      req.end();
-    });
-  };
-
   // Send to client
   const clientSubject = "Your Message Just Hit Our Radar";
   const clientHtmlContent = clientHtml(data.firstName, data.lastName, data.timezone);
@@ -150,25 +116,14 @@ const sendEmail = async (data = {}) => {
   };
 
   try {
-    // try SMTP first
     await transporter.sendMail(clientMailOptions);
+    console.log("[email] sent client confirmation via SMTP to", data.email);
   } catch (err) {
     console.error("[email] SMTP send to client failed:", err && err.message ? err.message : err);
-    // fallback to SendGrid if available
-    if (process.env.SENDGRID_API_KEY) {
-      try {
-        await sendWithSendGrid(data.email, clientSubject, clientHtmlContent);
-        console.log("[email] fallback: sent client email via SendGrid");
-      } catch (sgErr) {
-        console.error("[email] SendGrid fallback failed:", sgErr && sgErr.message ? sgErr.message : sgErr);
-        throw new Error("Failed to send confirmation email to client: " + (err.message || err));
-      }
-    } else {
-      throw new Error("Failed to send confirmation email to client: " + (err.message || err));
-    }
+    throw new Error("Failed to send confirmation email to client: " + (err.message || err));
   }
 
-  // Send to all team members in parallel
+  // Send to all team members in parallel using SMTP
   const teamSubject = "New Contact Form Submission";
   const teamHtmlContent = teamHtml(
     data.firstName,
@@ -179,28 +134,19 @@ const sendEmail = async (data = {}) => {
     data.message
   );
 
-  // attempt SMTP for team, otherwise fallback to SendGrid per recipient
   const results = await Promise.allSettled(
     teamEmails.map(async (teamEmail) => {
       try {
-        return await transporter.sendMail({
+        const res = await transporter.sendMail({
           from: `Maneuver Studios <${process.env.EMAIL_USER}>`,
           to: teamEmail,
           subject: teamSubject,
           html: teamHtmlContent,
         });
+        console.log(`[email] sent team email to ${teamEmail}`);
+        return res;
       } catch (teamErr) {
         console.error(`[email] SMTP send to ${teamEmail} failed:`, teamErr && teamErr.message ? teamErr.message : teamErr);
-        if (process.env.SENDGRID_API_KEY) {
-          try {
-            await sendWithSendGrid(teamEmail, teamSubject, teamHtmlContent);
-            console.log(`[email] fallback: sent team email to ${teamEmail} via SendGrid`);
-            return { fallback: true };
-          } catch (sgErr) {
-            console.error(`[email] SendGrid fallback to ${teamEmail} failed:`, sgErr && sgErr.message ? sgErr.message : sgErr);
-            throw teamErr;
-          }
-        }
         throw teamErr;
       }
     })
